@@ -18,6 +18,7 @@ content: string;
   //@ts-ignore
   const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
   document.getElementById("name")!.textContent = window.location.pathname.split("/")[2]
+  const welcoming="Buenas mis compañeros del MKUltra me acabo de conectar :D "
   
   const sendMsg = (e: Event)=> {
     e.preventDefault();
@@ -28,9 +29,20 @@ content: string;
     }
   
     ws.send(JSON.stringify({
-      author: localStorage.getItem("username"),
+      author: queries.get("username"),
       content: data.get("msg")
     }));
+    document.getElementById("messages")!.innerHTML += `
+      <div class="bg-white rounded p-2 mb-2">
+          <span>
+              ${queries.get("username")}
+          </span>
+          <p class="text-sm">
+              ${data.get("msg")}
+          </p>
+      </div>
+    `
+    data.set("msg","")
     form.value="";
   }
   

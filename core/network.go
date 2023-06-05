@@ -19,7 +19,7 @@ func ConnectMDNS(node host.Host, peerChan chan peer.AddrInfo, protocolID protoco
 		}
 		// Connect to the node at the given address.
 		if err := node.Connect(context.Background(), peerAddrInfo); err != nil {
-			panic(err)
+			return
 		}
 		// con esto solo me conecto a ese puerto
 		s, _ := node.NewStream(context.Background(), peerAddrInfo.ID, protocolID)

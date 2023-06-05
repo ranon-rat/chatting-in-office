@@ -24,7 +24,7 @@ func InitMDNS(peerhost host.Host, rendezvous string) chan peer.AddrInfo {
 	// An hour might be a long long period in practical applications. But this is fine for us
 	ser := mdns.NewMdnsService(peerhost, rendezvous, n)
 	if err := ser.Start(); err != nil {
-		panic(err)
+		return nil
 	}
 	return n.PeerChan
 }

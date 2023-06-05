@@ -5,6 +5,7 @@ var ws = new WebSocket(window.location.href.includes("https") ? "wss" : "ws" + "
 //@ts-ignore
 var form = document.getElementById("form");
 document.getElementById("name").textContent = window.location.pathname.split("/")[2];
+var welcoming = "Buenas mis compañeros del MKUltra me acabo de conectar :D ";
 var sendMsg = function (e) {
     e.preventDefault();
     var data = new FormData(form);
@@ -12,9 +13,11 @@ var sendMsg = function (e) {
         location.replace("http://" + window.location.host + "/channel/");
     }
     ws.send(JSON.stringify({
-        author: localStorage.getItem("username"),
+        author: queries.get("username"),
         content: data.get("msg")
     }));
+    document.getElementById("messages").innerHTML += "\n      <div class=\"bg-white rounded p-2 mb-2\">\n          <span>\n              ".concat(queries.get("username"), "\n          </span>\n          <p class=\"text-sm\">\n              ").concat(data.get("msg"), "\n          </p>\n      </div>\n    ");
+    data.set("msg", "");
     form.value = "";
 };
 form.addEventListener("submit", sendMsg);

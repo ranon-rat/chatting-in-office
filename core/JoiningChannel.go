@@ -21,14 +21,14 @@ func JoiningChannel(w http.ResponseWriter, r *http.Request) {
 	// Creates a new RSA key pair for this host.
 	prvKey, _, err := crypto.GenerateKeyPairWithReader(crypto.RSA, 2048, ra)
 	if err != nil {
-		panic(err)
+		return
 	}
 	node, err := libp2p.New(
 		libp2p.ListenAddrStrings("/ip4/127.0.0.1/tcp/0"),
 		libp2p.Identity(prvKey),
 	)
 	if err != nil {
-		panic(err)
+		return
 	}
 	defer node.Close()
 
@@ -50,6 +50,5 @@ func JoiningChannel(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		WriteMSG(msg.Content, msgChan, author, key)
-		msgChan <- msg
 	}
 }
