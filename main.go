@@ -1,16 +1,10 @@
 package main
 
 import (
-	crand "crypto/rand"
-	"flag"
 	"fmt"
 
-	"github.com/libp2p/go-libp2p"
-	"github.com/libp2p/go-libp2p/core/crypto"
-	"github.com/ranon-rat/chatting-in-office/core"
+	"github.com/ranon-rat/chatting-in-office/router"
 )
-
-const protocolID = "/chat/1.0.0"
 
 func main() {
 	fmt.Println(`
@@ -28,31 +22,5 @@ func main() {
 
 	`)
 
-	author := flag.String("username", "anon", "")
-	rendezvous := flag.String("channel", "public", "")
-	r := crand.Reader
-	// Creates a new RSA key pair for this host.
-	prvKey, _, err := crypto.GenerateKeyPairWithReader(crypto.RSA, 2048, r)
-	if err != nil {
-		panic(err)
-	}
-	node, err := libp2p.New(
-		libp2p.ListenAddrStrings("/ip4/127.0.0.1/tcp/0"),
-		libp2p.Identity(prvKey),
-	)
-	if err != nil {
-		panic(err)
-	}
-	defer node.Close()
-
-	// con esto lo que hago es simplemente dejar que en un puerto me pueda comunicar por medio de un protocolo
-	node.SetStreamHandler(protocolID, core.NewConnection)
-
-	flag.Parse()
-	peerChan := core.InitMDNS(node, *rendezvous)
-	core.InitCipher(*rendezvous)
-	go core.ConnectMDNS(node, peerChan, protocolID)
-	go core.WriteMessage()
-	core.WritingMessage(*author)
-
+	router.SetupRoutes()
 }

@@ -2,7 +2,10 @@ module github.com/ranon-rat/chatting-in-office
 
 go 1.19
 
-require github.com/libp2p/go-libp2p v0.27.5
+require (
+	github.com/gorilla/websocket v1.5.0
+	github.com/libp2p/go-libp2p v0.27.5
+)
 
 require (
 	github.com/benbjohnson/clock v1.3.0 // indirect

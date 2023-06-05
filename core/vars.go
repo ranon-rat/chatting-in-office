@@ -1,15 +1,15 @@
 package core
 
 import (
-	"crypto/cipher"
-
+	"github.com/gorilla/websocket"
 	"github.com/libp2p/go-libp2p/core/network"
 )
 
 var (
-	peers   = make(map[network.Stream]bool)
-	msgChan = make(chan Message)
-	Caes    cipher.Block
-	IDmap   = make(map[string]bool)
-	Author  = ""
+	upgrader = websocket.Upgrader{}
 )
+
+const protocolID = "/chat/1.0.0"
+
+type Peers map[network.Stream]bool
+type IDMapT map[string]bool

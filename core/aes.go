@@ -9,11 +9,8 @@ import (
 	"io"
 )
 
-func InitCipher(rendezvous string) {
-	var err error
-	if Caes, err = aes.NewCipher([]byte(AddInfo(rendezvous))); err != nil {
-		panic(err)
-	}
+func InitCipher(rendezvous string) (cipher.Block, error) {
+	return aes.NewCipher([]byte(AddInfo(rendezvous)))
 
 }
 func AddInfo(key string) string {
@@ -25,9 +22,9 @@ func AddInfo(key string) string {
 	}
 	return key
 }
-func EncryptMessage(message string) (string, error) {
+func EncryptMessage(message string, caes cipher.Block) (string, error) {
 	byteMsg := []byte(message)
-	block := Caes
+	block := caes
 
 	cipherText := make([]byte, aes.BlockSize+len(byteMsg))
 	iv := cipherText[:aes.BlockSize]
@@ -41,13 +38,13 @@ func EncryptMessage(message string) (string, error) {
 	return base64.StdEncoding.EncodeToString(cipherText), nil
 }
 
-func DecryptMessage(message string) (string, error) {
+func DecryptMessage(message string, caes cipher.Block) (string, error) {
 	cipherText, err := base64.StdEncoding.DecodeString(message)
 	if err != nil {
 		return "", fmt.Errorf("could not base64 decode: %v", err)
 	}
 
-	block := Caes
+	block := caes
 
 	if len(cipherText) < aes.BlockSize {
 		return "", fmt.Errorf("invalid ciphertext block size")
