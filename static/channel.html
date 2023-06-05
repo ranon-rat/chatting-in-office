@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #333;">
+    <div class="px-3 sm:px-0 w-screen h-screen flex flex-col items-center justify-center">
+        <h1 id="name" class="text-white text-2xl block mb-2 uppercase">
+        </h1>
+        <div id="messages" class="mb-5 h-2/4 w-full sm:w-3/4 lg:w-2/4 rounded p-5 flex flex-col overflow-y-scroll" style="background-color: #444;">
+            
+        </div>
+        <form id="form" class="w-full sm:w-3/4 lg:w-2/4 rounded p-5 flex flex-col" style="background-color: #444;">
+            <div class="mb-3">
+                <input type="text" name="msg" placeholder="message" id="message"
+                    class="transition duration-300 text-gray-400 focus:text-black rounded p-3 outline-none w-full" />
+            </div>
+
+            <button id="send" onclick="sendMsg()"
+                class="rounded w-full bg-indigo-600 hover:bg-indigo-700 p-3 text-white uppercase">
+                send
+            </button>
+        </form>
+
+    </div>
+
+    <script src="/script/sendAndReceiveMessages.js"></script>
+</body>
+
+</html>

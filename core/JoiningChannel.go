@@ -12,7 +12,7 @@ import (
 func JoiningChannel(w http.ResponseWriter, r *http.Request) {
 	ws, _ := upgrader.Upgrade(w, r, nil)
 	defer ws.Close()
-	author := r.URL.Query()["author"][0]
+	author := r.URL.Query()["username"][0]
 	channel := r.URL.Query()["channel"][0]
 
 	msgChan := make(chan Message)

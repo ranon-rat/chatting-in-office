@@ -1,6 +1,7 @@
 package router
 
 import (
+	"mime"
 	"net/http"
 	"os"
 
@@ -9,9 +10,10 @@ import (
 
 func SetupRoutes() {
 
+	mime.AddExtensionType(".js", "application/javascript")
 	http.Handle("/", http.FileServer(http.Dir("./static")))
-	http.HandleFunc("/message", func(w http.ResponseWriter, r *http.Request) {
-		f, _ := os.ReadFile("static/message.html")
+	http.HandleFunc("/channel", func(w http.ResponseWriter, r *http.Request) {
+		f, _ := os.ReadFile("static/channel.html")
 		w.Write(f)
 	})
 	http.HandleFunc("/ws", core.JoiningChannel)
