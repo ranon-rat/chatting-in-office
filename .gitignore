@@ -1,3 +1,5 @@
-static/script/*.js
+*.js
 *CIO
 *.zip
+executables
+core/__debug_bin
