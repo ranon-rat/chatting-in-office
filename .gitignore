@@ -1,3 +1,4 @@
 
 *.js
 executables
+core/__debug_bin
