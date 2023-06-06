@@ -1,12 +1,15 @@
 package router
 
 import (
+	"fmt"
 	"mime"
 	"net/http"
 	"os"
 
 	"github.com/ranon-rat/chatting-in-office/core"
 )
+
+var port = "8081"
 
 func SetupRoutes() {
 
@@ -17,5 +20,6 @@ func SetupRoutes() {
 		w.Write(f)
 	})
 	http.HandleFunc("/ws", core.JoiningChannel)
-	http.ListenAndServe(":8081", nil)
+	fmt.Println(" open url http://localhost:8081/")
+	http.ListenAndServe(":"+port, nil)
 }
