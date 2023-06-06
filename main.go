@@ -30,6 +30,8 @@ func main() {
 
 	author := flag.String("username", "anon", "")
 	rendezvous := flag.String("channel", "public", "")
+	flag.Parse()
+
 	r := crand.Reader
 	// Creates a new RSA key pair for this host.
 	prvKey, _, err := crypto.GenerateKeyPairWithReader(crypto.RSA, 2048, r)
@@ -48,7 +50,6 @@ func main() {
 	// con esto lo que hago es simplemente dejar que en un puerto me pueda comunicar por medio de un protocolo
 	node.SetStreamHandler(protocolID, core.NewConnection)
 
-	flag.Parse()
 	peerChan := core.InitMDNS(node, *rendezvous)
 	core.InitCipher(*rendezvous)
 	go core.ConnectMDNS(node, peerChan, protocolID)
