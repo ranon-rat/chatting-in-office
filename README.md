@@ -1,11 +1,13 @@
 # chatting-in-office
 Simple chat program that I made for chatting with the homies in the office.
 # how to run it
-Its really simple, you dont need to configure too  many stuff, you only need to run the executable and that will be all.
+Its really simple, you dont need to configure too  many stuff, you only need to decompress the zip file and run the executable inside it.
 
-If you want you can compile it yourself by using the next command
+If you want you can compile it yourself by using the next commands
 ```
+tsc *.ts
 go build main.go
+
 ```
 # how it works?
 
