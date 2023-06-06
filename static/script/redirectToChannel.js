@@ -22,6 +22,7 @@ var redirect = function (e) {
     }
     ;
     localStorage.setItem("username", data.get("username"));
-    location.replace("/channel?channel=" + data.get("channel") + "&username=" + data.get("username"));
+    //@ts-ignore
+    location.replace("/channel?channel=" + (data.get("channel") | "public") + "&username=" + data.get("username"));
 };
 form.addEventListener("submit", redirect);

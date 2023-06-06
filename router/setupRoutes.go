@@ -17,5 +17,5 @@ func SetupRoutes() {
 		w.Write(f)
 	})
 	http.HandleFunc("/ws", core.JoiningChannel)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8081", nil)
 }

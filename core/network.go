@@ -23,10 +23,10 @@ func ConnectMDNS(node host.Host, peerChan chan peer.AddrInfo, protocolID protoco
 		}
 		// con esto solo me conecto a ese puerto
 		s, _ := node.NewStream(context.Background(), peerAddrInfo.ID, protocolID)
-		if e := peers[s]; !e {
-			WriteMSG("Buenas mis compañeros del MKUltra me acabo de conectar :D ", msgChan, author, key)
-
-		}
+		//if e := peers[s]; !e {
+		//	WriteMSG("Buenas mis compañeros del MKUltra me acabo de conectar :D ", msgChan, author, key)
+		//
+		//}
 		peers[s] = true
 		IDmap[s.ID()] = true
 		go readMessage(s, *bufio.NewReadWriter(bufio.NewReader(s), bufio.NewWriter(s)), peers, IDmap, ws, key)

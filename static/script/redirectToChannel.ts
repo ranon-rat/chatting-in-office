@@ -27,7 +27,8 @@ const redirect = (e: Event) => {
     };
 
     localStorage.setItem("username", data.get("username") as string);
-    location.replace("/channel?channel="+data.get("channel")+"&username="+data.get("username"))
+    //@ts-ignore
+    location.replace("/channel?channel="+(data.get("channel")|"public")+"&username="+data.get("username"))
 }
 
 form.addEventListener("submit", redirect)
